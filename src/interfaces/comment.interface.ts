@@ -3,7 +3,7 @@ export interface IComment {
   boardId: string;
   title: string;
   cardOrderIds: string[];
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   _destroy: boolean;
 }
