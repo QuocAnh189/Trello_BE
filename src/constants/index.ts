@@ -1,3 +1,3 @@
-export * from './httpStatus';
-export * from './paths';
-export * from './schema';
+export * from './httpStatus.constant';
+export * from './paths.constant';
+export * from './schema.constant';
