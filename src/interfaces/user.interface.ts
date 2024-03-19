@@ -8,6 +8,6 @@ export interface IUser {
   role: string;
   isActive: boolean;
   verifyToken: boolean;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

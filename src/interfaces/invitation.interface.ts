@@ -1,10 +1,10 @@
-export interface IIvitation {
+export interface IInvitation {
   _id?: string;
   inviterId: string;
   inviteeId: string;
   type: string;
   boardInvitation: any;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   _destroy: boolean;
 }

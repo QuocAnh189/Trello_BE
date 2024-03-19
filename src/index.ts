@@ -1,6 +1,8 @@
 import express from 'express';
 import { CONNECT_DB, GET_DB, CLOSE_DB, PORT, HOST_NAME, NODE_ENV } from './configs';
 import { logger } from './utils';
+import route from './routes';
+import { defaultErrorHandler } from './middlewares';
 
 const START_SERVER = () => {
   const app = express();
@@ -8,6 +10,9 @@ const START_SERVER = () => {
   // app.get("/", async (req, res) => {
   //   console.log(await GET_DB().listCollections().toArray());
   // });
+  app.use(express.json());
+  app.use(route);
+  app.use(defaultErrorHandler);
 
   app.listen(PORT, () => {
     logger.info(`=================================`);

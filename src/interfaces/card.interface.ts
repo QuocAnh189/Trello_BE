@@ -3,7 +3,7 @@ export interface IAttackment {
   fileName: string;
   fileType: string;
   fileURL: string;
-  createAt: Date;
+  createdAt: Date;
 }
 
 export interface ICard {
@@ -16,7 +16,7 @@ export interface ICard {
   memberIds: string[];
   commentIds: string[];
   attackmentsIds: IAttackment[];
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   _destroy: boolean;
 }
