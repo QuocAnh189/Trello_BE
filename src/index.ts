@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+import { corsOptions } from './configs';
 import { CONNECT_DB, GET_DB, CLOSE_DB, PORT, HOST_NAME, NODE_ENV } from './configs';
 import { logger } from './utils';
 import route from './routes';
@@ -11,6 +13,7 @@ const START_SERVER = () => {
   //   console.log(await GET_DB().listCollections().toArray());
   // });
   app.use(express.json());
+  app.use(cors(corsOptions));
   app.use(route);
   app.use(defaultErrorHandler);
 
