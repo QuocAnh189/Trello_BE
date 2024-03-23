@@ -20,7 +20,7 @@ export default class BoardRoute implements IRoutes {
   private initializeRoutes() {
     this.router.get('/', wrapRequestHandler(this.board.getBoards));
     this.router.get('/:id', wrapRequestHandler(this.board.getBoard));
-    this.router.post('/:id', wrapRequestHandler(this.board.createBoard));
+    this.router.post('/', wrapRequestHandler(this.board.createBoard));
     this.router.patch('/:id', wrapRequestHandler(this.board.updateBoard));
     this.router.delete('/:id', wrapRequestHandler(this.board.deleteBoard));
   }
