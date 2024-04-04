@@ -15,7 +15,7 @@ import { IBoard } from '@/interfaces'
 import { cloneDeep, String } from 'lodash'
 
 //model
-import { boardModel, cardModel, columnModel } from '@/models'
+import { SCHEMA_NAME } from '@/constants'
 import { slugify } from '@/utils'
 
 @Service()
@@ -31,14 +31,14 @@ export class BoardService {
   public async getBoard(id: string): Promise<IBoard> {
     try {
       const board = await GET_DB()
-        .collection(boardModel.BOARD_COLLECTION_NAME)
+        .collection(SCHEMA_NAME.BOARD)
         .findOne({ _id: new ObjectId(id) })
       if (!board) {
         throw new HttpException(HTTP_STATUS.NOT_FOUND, `Board not found`)
       }
 
       // const result = await GET_DB()
-      //   .collection(boardModel.BOARD_COLLECTION_NAME)
+      //   .collection(SCHEMA_NAME.BOARD)
       //   .aggregate([
       //     { $match: { _id: new ObjectId(id.trim()), _destroy: false } },
       //     {
@@ -88,10 +88,8 @@ export class BoardService {
         updatedAt: new Date(),
         _destroy: false
       }
-      const createdBoard = await GET_DB().collection(boardModel.BOARD_COLLECTION_NAME).insertOne(newBoard)
-      const board = await GET_DB()
-        .collection(boardModel.BOARD_COLLECTION_NAME)
-        .findOne({ _id: createdBoard.insertedId })
+      const createdBoard = await GET_DB().collection(SCHEMA_NAME.BOARD).insertOne(newBoard)
+      const board = await GET_DB().collection(SCHEMA_NAME.BOARD).findOne({ _id: createdBoard.insertedId })
 
       return board
     } catch {

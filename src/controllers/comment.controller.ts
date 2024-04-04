@@ -8,26 +8,36 @@ export class CommentController {
 
   public getComments = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public getComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public createComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public updateComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public deleteComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 }

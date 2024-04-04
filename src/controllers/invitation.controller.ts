@@ -8,26 +8,36 @@ export class InvitationController {
 
   public getInvitations = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public getInvitation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public createInvitation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public updateInvitation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public deleteInvitation = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 }

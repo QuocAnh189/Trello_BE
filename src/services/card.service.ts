@@ -1,16 +1,15 @@
+import { ObjectId } from 'mongodb'
 import { Service } from 'typedi'
+import { GET_DB } from '@/configs'
 
 //constant
-import { HTTP_STATUS } from '@/constants'
+import { HTTP_STATUS, SCHEMA_NAME } from '@/constants'
 
 //exception
 import { HttpException } from '@/exceptions/httpException'
 
 //interface
 import { ICard } from '@/interfaces'
-import { ObjectId } from 'mongodb'
-import { GET_DB } from '@/configs'
-import { cardModel, columnModel } from '@/models'
 
 @Service()
 export class CardService {
@@ -25,7 +24,7 @@ export class CardService {
   public async getCardsByColumnId(id: string): Promise<ICard[]> {
     try {
       const cards = await GET_DB()
-        .collection(cardModel.CARD_COLLECTION_NAME)
+        .collection(SCHEMA_NAME.CARD)
         .find({ columnId: new ObjectId(id) })
         .toArray()
       return cards
@@ -57,10 +56,10 @@ export class CardService {
         updatedAt: new Date(),
         _destroy: false
       }
-      const createdCard = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).insertOne(newCard)
-      const card = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).findOne({ _id: createdCard.insertedId })
+      const createdCard = await GET_DB().collection(SCHEMA_NAME.CARD).insertOne(newCard)
+      const card = await GET_DB().collection(SCHEMA_NAME.CARD).findOne({ _id: createdCard.insertedId })
       await GET_DB()
-        .collection(columnModel.COLUMN_COLLECTION_NAME)
+        .collection(SCHEMA_NAME.COLUMN)
         .findOneAndUpdate({ _id: card.columnId }, { $push: { cardOrderIds: card._id } }, { returnDocument: 'after' })
 
       return card

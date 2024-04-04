@@ -9,7 +9,9 @@ export class CardController {
 
   public getCards = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public getCardsByColumnId = async (req: Request, res: Response, next: NextFunction) => {
@@ -17,12 +19,16 @@ export class CardController {
       const { id } = req.params
       const cards = await this.card.getCardsByColumnId(id)
       res.status(HTTP_STATUS.OK).json(cards)
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public getCard = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public createCard = async (req: Request, res: Response, next: NextFunction) => {
@@ -38,11 +44,15 @@ export class CardController {
 
   public updateCard = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 
   public deleteCard = async (req: Request, res: Response, next: NextFunction) => {
     try {
-    } catch {}
+    } catch (error) {
+      next(error)
+    }
   }
 }
