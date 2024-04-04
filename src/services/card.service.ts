@@ -1,24 +1,24 @@
-import { Service } from 'typedi';
+import { Service } from 'typedi'
 
 //constant
-import { HTTP_STATUS } from '@/constants';
+import { HTTP_STATUS } from '@/constants'
 
 //exception
-import { HttpException } from '@/exceptions/httpException';
+import { HttpException } from '@/exceptions/httpException'
 
 //interface
-import { ICard } from '@/interfaces';
-import { ObjectId } from 'mongodb';
-import { GET_DB } from '@/configs';
-import { cardModel, columnModel } from '@/models';
+import { ICard } from '@/interfaces'
+import { ObjectId } from 'mongodb'
+import { GET_DB } from '@/configs'
+import { cardModel, columnModel } from '@/models'
 
 @Service()
 export class CardService {
   public async getCards(): Promise<ICard[]> {
     try {
-      return [];
+      return []
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
@@ -27,18 +27,18 @@ export class CardService {
       const cards = await GET_DB()
         .collection(cardModel.CARD_COLLECTION_NAME)
         .find({ columnId: new ObjectId(id) })
-        .toArray();
-      return cards;
+        .toArray()
+      return cards
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async getCard(): Promise<ICard> {
     try {
-      return null;
+      return null
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
@@ -55,33 +55,33 @@ export class CardService {
         attackmentsIds: [],
         createdAt: new Date(),
         updatedAt: new Date(),
-        _destroy: false,
-      };
-      const createdCard = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).insertOne(newCard);
-      const card = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).findOne({ _id: createdCard.insertedId });
+        _destroy: false
+      }
+      const createdCard = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).insertOne(newCard)
+      const card = await GET_DB().collection(cardModel.CARD_COLLECTION_NAME).findOne({ _id: createdCard.insertedId })
       await GET_DB()
         .collection(columnModel.COLUMN_COLLECTION_NAME)
-        .findOneAndUpdate({ _id: card.columnId }, { $push: { cardOrderIds: card._id } }, { returnDocument: 'after' });
+        .findOneAndUpdate({ _id: card.columnId }, { $push: { cardOrderIds: card._id } }, { returnDocument: 'after' })
 
-      return card;
+      return card
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async updateCard(): Promise<ICard> {
     try {
-      return null;
+      return null
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async deleteCard(): Promise<any> {
     try {
-      return null;
+      return null
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 }

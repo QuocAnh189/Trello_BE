@@ -5,5 +5,5 @@ export const SCHEMA = {
   CARD: 'cards',
   INVITATION: 'invitations',
   COMMENT: 'comments',
-  ATTACKMENT: 'attackments',
-};
+  ATTACKMENT: 'attackments'
+}

@@ -1,27 +1,27 @@
-import { Router } from 'express';
+import { Router } from 'express'
 
 //interface
-import { IRoutes } from '@/interfaces';
+import { IRoutes } from '@/interfaces'
 
 //controller
-import { AuthController } from '@/controllers';
+import { AuthController } from '@/controllers'
 
 //util
-import { wrapRequestHandler } from '@/utils';
+import { wrapRequestHandler } from '@/utils'
 
 export default class AuthRoute implements IRoutes {
-  public router = Router();
-  public auth = new AuthController();
+  public router = Router()
+  public auth = new AuthController()
 
   constructor() {
-    this.initializeRoutes();
+    this.initializeRoutes()
   }
 
   private initializeRoutes() {
-    this.router.post('/signup', wrapRequestHandler(this.auth.signUp));
-    this.router.post('/signin', wrapRequestHandler(this.auth.signIn));
-    this.router.delete('/signout', wrapRequestHandler(this.auth.signOut));
-    this.router.post('/forgot-password', wrapRequestHandler(this.auth.forgotPassword));
-    this.router.patch('/reset-password', wrapRequestHandler(this.auth.resetPassword));
+    this.router.post('/signup', wrapRequestHandler(this.auth.signUp))
+    this.router.post('/signin', wrapRequestHandler(this.auth.signIn))
+    this.router.delete('/signout', wrapRequestHandler(this.auth.signOut))
+    this.router.post('/forgot-password', wrapRequestHandler(this.auth.forgotPassword))
+    this.router.patch('/reset-password', wrapRequestHandler(this.auth.resetPassword))
   }
 }

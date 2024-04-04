@@ -6,5 +6,5 @@ export function slugify(str: string) {
     .toLowerCase() // convert to lowercase
     .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
     .replace(/\s+/g, '-') // replace spaces with hyphens
-    .replace(/-+/g, '-'); // remove consecutive hyphens
+    .replace(/-+/g, '-') // remove consecutive hyphens
 }

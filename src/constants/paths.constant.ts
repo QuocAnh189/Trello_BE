@@ -1,4 +1,4 @@
-export const API = '/api';
+export const API = '/api'
 
 export const PATHS = {
   AUTH: `${API}/auth`,
@@ -8,5 +8,5 @@ export const PATHS = {
   CARD: `${API}/card`,
   INVITATION: `${API}/invitation`,
   COMMENT: `${API}/comment`,
-  ATTACKMENT: `${API}/attackment`,
-};
+  ATTACKMENT: `${API}/attackment`
+}
