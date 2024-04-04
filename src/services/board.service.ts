@@ -1,44 +1,44 @@
-import { Service } from 'typedi';
-import { ObjectId } from 'mongodb';
-import { GET_DB } from '@/configs';
+import { Service } from 'typedi'
+import { ObjectId } from 'mongodb'
+import { GET_DB } from '@/configs'
 
 //constant
-import { HTTP_STATUS } from '@/constants';
+import { HTTP_STATUS } from '@/constants'
 
 //exception
-import { HttpException } from '@/exceptions/httpException';
+import { HttpException } from '@/exceptions/httpException'
 
 //interface
-import { IBoard } from '@/interfaces';
+import { IBoard } from '@/interfaces'
 
 //lodash
-import { cloneDeep, String } from 'lodash';
+import { cloneDeep, String } from 'lodash'
 
 //model
-import { boardModel, cardModel, columnModel } from '@/models';
-import { slugify } from '@/utils';
+import { SCHEMA_NAME } from '@/constants'
+import { slugify } from '@/utils'
 
 @Service()
 export class BoardService {
   public async getBoards(): Promise<IBoard[]> {
     try {
-      return [];
+      return []
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async getBoard(id: string): Promise<IBoard> {
     try {
       const board = await GET_DB()
-        .collection(boardModel.BOARD_COLLECTION_NAME)
-        .findOne({ _id: new ObjectId(id) });
+        .collection(SCHEMA_NAME.BOARD)
+        .findOne({ _id: new ObjectId(id) })
       if (!board) {
-        throw new HttpException(HTTP_STATUS.NOT_FOUND, `Board not found`);
+        throw new HttpException(HTTP_STATUS.NOT_FOUND, `Board not found`)
       }
 
       // const result = await GET_DB()
-      //   .collection(boardModel.BOARD_COLLECTION_NAME)
+      //   .collection(SCHEMA_NAME.BOARD)
       //   .aggregate([
       //     { $match: { _id: new ObjectId(id.trim()), _destroy: false } },
       //     {
@@ -72,9 +72,9 @@ export class BoardService {
       //   throw new HttpException(HTTP_STATUS.NOT_FOUND, `Board not found`);
       // }
 
-      return board;
+      return board
     } catch (e) {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
@@ -86,32 +86,30 @@ export class BoardService {
         columnsOrderIds: [],
         createdAt: new Date(),
         updatedAt: new Date(),
-        _destroy: false,
-      };
-      const createdBoard = await GET_DB().collection(boardModel.BOARD_COLLECTION_NAME).insertOne(newBoard);
-      const board = await GET_DB()
-        .collection(boardModel.BOARD_COLLECTION_NAME)
-        .findOne({ _id: createdBoard.insertedId });
+        _destroy: false
+      }
+      const createdBoard = await GET_DB().collection(SCHEMA_NAME.BOARD).insertOne(newBoard)
+      const board = await GET_DB().collection(SCHEMA_NAME.BOARD).findOne({ _id: createdBoard.insertedId })
 
-      return board;
+      return board
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async updateBoard(): Promise<IBoard> {
     try {
-      return null;
+      return null
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 
   public async deleteBoard(): Promise<any> {
     try {
-      return null;
+      return null
     } catch {
-      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`);
+      throw new HttpException(HTTP_STATUS.INTERNAL_SERVER_ERROR, `Server error`)
     }
   }
 }

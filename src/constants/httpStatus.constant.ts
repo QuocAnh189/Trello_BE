@@ -10,5 +10,5 @@ export const HTTP_STATUS: { [key: string]: number } = {
   NOT_FOUND: 404,
   CONFLICT: 409,
   UNPROCESSABLE_ENTITY: 422,
-  INTERNAL_SERVER_ERROR: 500,
-} as const;
+  INTERNAL_SERVER_ERROR: 500
+} as const

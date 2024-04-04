@@ -1,105 +1,26 @@
-import {
-  IsDateString,
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  IsOptional,
-  IsPhoneNumber,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import Joi from 'joi'
 
-/**
- * @openapi
- * components:
- *  schemas:
- *    LoginDto:
- *      type: object
- *      properties:
- *        email:
- *          type: string
- *          default: jane.doe@example.com
- *        password:
- *          type: string
- *          default: User*123
- */
-export class SignInUserDto {
-  @IsEmail()
-  public email: string;
 
-  @IsString()
-  public password: string;
-}
+export const SignUpDto = Joi.object({
+  email: Joi.string().required().min(3).max(50).trim().strict(),
+  username: Joi.string().required().min(3).max(30).trim().strict(),
+  password: Joi.string().required().min(3).max(30).trim().strict(),
+  displayName: Joi.string().required().min(3).max(30).trim().strict(),
+  avatar: Joi.string().required().min(3).max(255).trim().strict(),
+  role: Joi.string().required().min(3).max(30).trim().strict(),
+  isActive: Joi.boolean().default(true),
+  verifyToken: Joi.boolean().default(false),
+  createdAt: Joi.date().timestamp('javascript').default(Date.now),
+  updatedAt: Joi.date().timestamp('javascript').default(null)
+})
 
-/**
- * @openapi
- * components:
- *  schemas:
- *    CreateUserDto:
- *      type: object
- *      required:
- *        - email
- *        - password
- *        - username
- *        - phone
- *      properties:
- *        email:
- *          type: string
- *          default: jane.doe@example.com
- *        password:
- *          type: string
- *          default: User*123
- *        username:
- *          type: string
- *          default: Jane Doe
- *        phone:
- *          type: string
- *          default: 0923456789
- */
-export class SignUpUserDto {
-  @IsEmail()
-  @IsNotEmpty()
-  @MaxLength(30)
-  public email: string;
+export const SignInDto = Joi.object({})
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(15)
-  public name: string;
+export const SignOutDto = Joi.object({})
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(32)
-  public password: string;
+export const ForgotPasswordDto = Joi.object({})
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(32)
-  public confirmpassword: string;
-}
+export const ResetPasswordDto = Joi.object({})
 
-/**
- * @openapi
- * components:
- *  schemas:
- *    RefreshTokenDto:
- *      type: object
- *      required:
- *        - refreshToken
- *      properties:
- *        refreshToken:
- *          type: string
- */
-export class RefreshTokenDto {
-  @IsString()
-  public refreshToken: string;
-}
 
-export class SignOutDto {
-  @IsString()
-  public id: string;
-}
+

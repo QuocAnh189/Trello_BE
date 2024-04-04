@@ -1,5 +1,5 @@
-import { Router } from 'express';
+import { Router } from 'express'
 
 export interface IRoutes {
-  router: Router;
+  router: Router
 }
